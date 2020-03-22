@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # GIMP Plug-In.
 
-# Create montage from layers.
+# Create a montage from layers.
 
 from gimpfu import *
 
@@ -10,7 +10,6 @@ def prt(*x):
 	pdb.gimp_message(x)
 
 def montage(image,w,h,order):
-	prt(image)
 	# Verify parameters.
 	w=max(1,w)
 	h=max(1,h)
@@ -18,7 +17,6 @@ def montage(image,w,h,order):
 	layers=image.layers
 	layer_sizes=[(x.width,x.height) for x in layers]
 	biggest_layer=max(layer_sizes)
-	prt(biggest_layer)
 	# Use it for cell size.
 	(cell_w,cell_h)=biggest_layer
 	# Duplicate the image.
@@ -35,8 +33,6 @@ def montage(image,w,h,order):
 		pdb.gimp_layer_set_offsets(x,(i%w)*cell_w,(i//w)*cell_h)
 	# Display.
 	pdb.gimp_display_new(new_image)	
-	prt("done")
-	
 
 register(
 	"python_fu_montage", # Proc name
